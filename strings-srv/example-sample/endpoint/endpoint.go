@@ -3,13 +3,13 @@ package endpoint
 import (
 	"context"
 	"github.com/go-kit/kit/endpoint"
-	"github.com/hailinluo/gokit-examples/strings-srv/service"
-	"github.com/hailinluo/gokit-examples/strings-srv/transport"
+	"github.com/hailinluo/gokit-examples/strings-srv/example-sample/service"
+	"github.com/hailinluo/gokit-examples/strings-srv/example-sample/transport"
 )
 
-func makeUppercaseEndpoint(svc service.StringService) endpoint.Endpoint {
+func MakeUppercaseEndpoint(svc service.StringService) endpoint.Endpoint {
 	return func(_ context.Context, request interface{}) (interface{}, error) {
-		req := request.(transport.UpercaseRequest)
+		req := request.(transport.UppercaseRequest)
 		v, err := svc.Uppercase(req.S)
 		if err != nil {
 			return transport.UppercaseResponse{v, err.Error()}, nil
@@ -18,7 +18,7 @@ func makeUppercaseEndpoint(svc service.StringService) endpoint.Endpoint {
 	}
 }
 
-func makeCountEndpoint(svc StringService) endpoint.Endpoint {
+func MakeCountEndpoint(svc service.StringService) endpoint.Endpoint {
 	return func(_ context.Context, request interface{}) (interface{}, error) {
 		req := request.(transport.CountRequest)
 		v := svc.Count(req.S)
